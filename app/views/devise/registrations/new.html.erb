@@ -1,0 +1,65 @@
+<div class="container d-flex align-items-center justify-content-center min-vh-100">  
+  <div class="col-lg-4 col-md-6 col-10 shadow-lg p-4 rounded">
+    <h2>Sign up</h2>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+
+      <div class="field">
+        <%= f.label :name %><br />
+        <%= f.text_field :name, autofocus: true, class: 'form-control' %>
+        <% if resource.errors[:name].present? %>
+          <div class="text-danger"><%= resource.errors[:name].first %></div>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= f.label :mobile_number %><br />
+        <%= f.text_field :mobile_no, autofocus: true, class: 'form-control' %>
+        <% if resource.errors[:mobile_no].present? %>
+          <div class="text-danger"><%= resource.errors[:mobile_no].first %></div>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+        <% if resource.errors[:email].present? %>
+          <div class="text-danger"><%= resource.errors[:email].first %></div>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= f.label :roles %>
+        <%= f.select :role, User.roles.select { |role, _value| ['guest', 'publisher'].include?(role) }.keys, {}, { class: 'form-control' } %>
+        <% if resource.errors[:role].present? %>
+          <div class="text-danger"><%= resource.errors[:role].first %></div>
+        <% end %>
+      </div>
+    
+      <div class="field">
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
+        <% if resource.errors[:password].present? %>
+          <div class="text-danger"><%= resource.errors[:password].first %></div>
+        <% end %>
+      </div>
+    
+      <div class="field">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+        <% if resource.errors[:password_confirmation].present? %>
+          <div class="text-danger"><%= resource.errors[:password_confirmation].first %></div>
+        <% end %>
+      </div>
+    
+      <div class="actions text-white mt-2" style="display: flex; justify-content: center;">
+        <%= f.submit "Sign up", class: "btn btn-outline-02 me-2" %>
+      </div>
+    <% end %>
+    
+    <% render "devise/shared/links" %>
+  </div>
+</div>
